@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Indiegames Attack</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" charset="utf-8" />
-    <meta charset="UTF-8">
-	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="themes/jquery.mobile.structure-1.4.5.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="js/jquery-1.11.1.min.js"></script>
-    <script src="js/jquery.mobile-1.4.5.min.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
+<meta charset="UTF-8">
+<title>Indiegames Attack</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Russo+One' rel='stylesheet' type='text/css'>
     
 </head>
 
@@ -31,11 +29,10 @@
             <!--- CONTENIDO !-->
             <div data-role="content">	
             <form id="formulario" >
-            <input type="text" id="nombredeusuario" name="nombredeusuario" placeholder="Nombre de usuario">
-            <input type="password" id="clave" name="clave" placeholder="Contraseña">
+            <input type="text" id="nombredeusuario" name="nombredeusuario">
+            <input type="password" id="clave" name="clave">
             <input type="submit" value="Login">
-            
-            <a class="submitButton tagasubmit" href="http://indiegamesattack.tk/registro">Registrarse</a>
+            <input type="button" value="Registrarse">
             </form>	
             </div>
             </div>
@@ -192,6 +189,7 @@
     var homeLoaded = false;
     var favoritesLoaded = false;
 	archivoValidacion = "http://indiegamesattack.tk/appindie/validacionReal.php?jsoncallback=?" 
+	//archivoValidacion = "http://localhost/appindie/validacionReal.php?jsoncallback=?" 
 	 
 	$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword}) 
 	.done(function(respuestaServer) {
@@ -224,7 +222,103 @@
                     
                     });
                 
+                //
 			});
+
+		
+            /*
+			$("#favorito").on("pageshow", function(){ //al mostrarse esa pagina pasa algo.
+                if(favoritesLoaded == false){ // Reviso si ya lo cargo una vez
+                var elementosF = Object.keys(respuestaServer["favoritos"]).length;
+
+				for(var i=0; i< elementosF ; i++){
+                    
+                    var nombresCatsFav = "";
+                    var arrCategoriasFav = respuestaServer["favoritos"][i].categorias;
+
+                    for(var c=0; c< arrCategoriasFav.length ; c++){
+                            if(c == 0){
+                                nombresCatsFav = arrCategoriasFav[c].nombreCAT;
+                            }else{
+                                nombresCatsFav = nombresCatsFav + ", " + arrCategoriasFav[c].nombreCAT;
+                            }
+                    }
+                    
+                    var nombresGensFav = "";
+                    var arrGenerosFav = respuestaServer["favoritos"][i].generos;
+
+                    for(var g=0; g< arrGenerosFav.length ; g++){
+                            if(g == 0){
+                                nombresGensFav = arrGenerosFav[g].nombreGEN;
+                            }else{
+                                nombresGensFav = nombresGensFav + ", " + arrGenerosFav[g].nombreGEN;
+                            }
+                    }
+                    
+                    
+                    
+                     $('#articulos-favoritos').append(
+                    '<li class="articulo-favorito"><a data-transition="flip" href="javascript:openArticle(' + respuestaServer["favoritos"][i].idArticulo + ');">' +     
+					'<img src="/indie/' + respuestaServer["favoritos"][i].imagen + '"/>' +
+					'<h1>' + respuestaServer["favoritos"][i].tituloES + '</h1>' +
+                    '<p class="genero">' + nombresGensFav + '</p>' +
+                    '<p class="categoria">' + nombresCatsFav + '</p>' +
+					'</span></a></li>');
+				}
+                
+                    
+                favoritesLoaded = true;
+                }
+			});   
+            */
+            
+            /*
+            $("#preferencias").on("pageshow", function(){ //al mostrarse esa pagina pasa algo.
+                $('#lista-generos li').remove();
+                var cantGenPref = Object.keys(respuestaServer["generosprefe"]).length;
+                var cantListaGeneros = Object.keys(respuestaServer["listageneros"]).length;
+                
+                var arrayListaGeneros = new Array();
+                var arrayGenPref = new Array();
+                //var arrayListaGeneros = ["Accion","Rol","Aventura"];
+                
+                // Hago un array con todos los generos que existen
+                for(var lg=0; lg< cantListaGeneros ; lg++ ){
+                    //var arrayListaGeneros[] = respuestaServer["listageneros"][lg].nombreES;
+                    arrayListaGeneros.push(respuestaServer["listageneros"][lg].nombreES);
+                }
+                   
+                // Hago un array con los generos del usuario logueado
+				for(var p=0; p< cantGenPref ; p++){     
+                        arrayGenPref.push(respuestaServer["generosprefe"][p].nombreES);
+				}
+                
+                
+                // Genero lista de generos
+                for(var ar=0; ar< cantListaGeneros ; ar++){
+                  $('#lista-generos').append(
+                         '<li class="li-pref">' +
+                         '<img class="img-pref" src="img/preferencias/gen'+respuestaServer["listageneros"][ar].idGenero+'.png"/>' +
+                         '<h1>' + respuestaServer["listageneros"][ar].nombreES + '</h1>' + 
+                         '<label class="switch-box">'+
+                         '<input class="ios-switch green" id="check'+ respuestaServer["listageneros"][ar].idGenero +'" type="checkbox" name="check_list[]" value="'+ respuestaServer["listageneros"][ar].idGenero +'">'+'<div class="warer">'+'<div>'+'</div>'+'</div>'+'</input>' + '</label>' +
+                    '</li>');
+                    
+                    
+                    // Comparo si el genero esta en la lista de generos si es asi lo pongo como checked
+                    if($.inArray(respuestaServer["listageneros"][ar].nombreES, arrayGenPref) != -1) {
+                        //console.log("is in array");
+                        $('#check' + respuestaServer["listageneros"][ar].idGenero).prop("checked", true);
+                    }else {
+                        //console.log("is NOT in array");
+                    }
+                    
+                }
+                
+                
+                //$('#lista-generos').listview('refresh');
+			}); 
+             */
 
                 /* Esto guarda en el localstorage */
                 var datosLocales = JSON.stringify(respuestaServer);
@@ -333,7 +427,7 @@
                     
                      $('#articulos-favoritos').append(
                     '<li class="articulo-favorito"><a data-transition="flip" href="javascript:openArticle(' + data["favoritos"][i].idArticulo + ');">' +     
-					'<img src="http://indiegamesattack.tk/indie/' + data["favoritos"][i].imagen + '"/>' +
+					'<img src="../' + data["favoritos"][i].imagen + '"/>' +
 					'<h1>' + data["favoritos"][i].tituloES + '</h1>' +
                     '<p class="genero">' + nombresGensFav + '</p>' +
                     '<p class="categoria">' + nombresCatsFav + '</p>' +
@@ -370,9 +464,23 @@ function cargarArticulo(data) {
         }
     
     
+    /*
+    * Para remplazar un texto por espacio en blanco en jquery
+    var someVariable = data["articulo"][0].contenidoES;
+    someVariable = someVariable.replace('<p>', '');
+    someVariable = someVariable.replace('</p>', '');
+    $('#text-article').text(someVariable);
+    */
+    
+    
+    //var textoArt = data["articulo"][0].contenidoES;
+    //jQuery('<div />').text(textoArt).html();
+    //alert(textoArt);
+    //jQuery('<div />').html(textoArt).text() //
+    
     $('#category-article').text(nombresCatsArt);
     $('#title-article').text(data["articulo"][0].tituloES);
-	$('#cover-article').attr('src', 'http://indiegamesattack.tk/indie/' + data["articulo"][0].portada);
+	$('#cover-article').attr('src', '../' + data["articulo"][0].portada);
 	//$('#fav-btn').attr('href', 'marcarFavorito('+data["articulo"][0].idArticulo+')');
 	$('#date-article').text(data["articulo"][0].fecha);
 	$('#text-article').html(data["articulo"][0].contenidoES);
@@ -432,7 +540,7 @@ function pedirArticulos(parameterGenre){
                  '<li class="articulo-popular">' +
                  '<a href="javascript:openArticle(' + data["articulos"][i].idArticulo + ');">' +
                  '<p class="genero">' + nombresCats + '</p>' +   
-                 '<img src="http://indiegamesattack.tk/indie/' + data["articulos"][i].imagen + '"/>' +
+                 '<img src="../' + data["articulos"][i].imagen + '"/>' +
                  '<h1>' + data["articulos"][i].tituloES + '</h1>' +
                  '</span></a></li>');
              }
