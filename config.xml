@@ -8,14 +8,14 @@ version     = "1.0.0" >
 
 <!-- versionCodeisoptional and Android only -->
 
-<name>PhoneGapExample</name>
+<name>Indiegames Attack</name>
 
 <description>
-Anexampleforphonegapbuild docs. 
+¡Recibe las últimas noticias, videos y reseñas sobre videojuegos independientes, basadas en tus preferencias!
 </description>
 
 <author href="https://build.phonegap.com" email="support@phonegap.com">
-HardeepShoker
+Dylan M
 </author>
 
         
