@@ -31,8 +31,8 @@
             <form id="formulario" >
             <input type="text" id="nombredeusuario" name="nombredeusuario">
             <input type="password" id="clave" name="clave">
-            <input type="submit" value="Login">
-            <input type="button" value="Registrarse">
+            <input type="submit" value="Iniciar Sesión">
+            <a href="http://indiegamesattack.tk" >Registrarse</a>
             </form>	
             </div>
             </div>
@@ -427,7 +427,7 @@
                     
                      $('#articulos-favoritos').append(
                     '<li class="articulo-favorito"><a data-transition="flip" href="javascript:openArticle(' + data["favoritos"][i].idArticulo + ');">' +     
-					'<img src="../' + data["favoritos"][i].imagen + '"/>' +
+					'<img src="http://indiegamesattack.tk/' + data["favoritos"][i].imagen + '"/>' +
 					'<h1>' + data["favoritos"][i].tituloES + '</h1>' +
                     '<p class="genero">' + nombresGensFav + '</p>' +
                     '<p class="categoria">' + nombresCatsFav + '</p>' +
@@ -480,10 +480,17 @@ function cargarArticulo(data) {
     
     $('#category-article').text(nombresCatsArt);
     $('#title-article').text(data["articulo"][0].tituloES);
-	$('#cover-article').attr('src', '../' + data["articulo"][0].portada);
+	$('#cover-article').attr('src', 'http://indiegamesattack.tk/' + data["articulo"][0].portada);
 	//$('#fav-btn').attr('href', 'marcarFavorito('+data["articulo"][0].idArticulo+')');
 	$('#date-article').text(data["articulo"][0].fecha);
-	$('#text-article').html(data["articulo"][0].contenidoES);
+     
+     
+     var re = "//www.youtube";
+     var str = data["articulo"][0].contenidoES;
+     var contenidoOptimizado = str.replace(re, "https://www.youtube");
+
+    
+	$('#text-article').html(contenidoOptimizado);
     
     $('#dwn-btn').attr('href', data["articulo"][0].url);
     //$('#fav-btn').attr('onclick', 'marcarFavorito('+data["articulo"][0].idArticulo+')');
@@ -540,7 +547,7 @@ function pedirArticulos(parameterGenre){
                  '<li class="articulo-popular">' +
                  '<a href="javascript:openArticle(' + data["articulos"][i].idArticulo + ');">' +
                  '<p class="genero">' + nombresCats + '</p>' +   
-                 '<img src="../' + data["articulos"][i].imagen + '"/>' +
+                 '<img src="http://indiegamesattack.tk/' + data["articulos"][i].imagen + '"/>' +
                  '<h1>' + data["articulos"][i].tituloES + '</h1>' +
                  '</span></a></li>');
              }

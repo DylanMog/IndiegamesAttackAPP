@@ -60,6 +60,23 @@ text-shadow:none
     border:0;
 }
 
+#formulario a{
+  	background: #f6b723;
+    border-radius: 0; 
+    color: white;
+    border: none;
+    font-family: 'Russo One', sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    border:0;
+    text-decoration: none;
+     width: 100%;
+     display: block;
+     height: 40px;
+     text-align: center;
+     line-height: 40px;
+}
+
 .ui-btn-hover-c:hover{
     background: #f3b21a;
     border-radius: 0; 
@@ -68,6 +85,7 @@ text-shadow:none
     font-family: 'Russo One', sans-serif;
     text-transform: uppercase;
     font-weight: 400;
+     
 }
 
 .ui-content{
