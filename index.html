@@ -98,7 +98,7 @@
             <div id="fav-btn"><div></div></div>
             <p id="published">Publicado: </p><p id="date-article"></p>
             <div id="text-article"></div>
-            <a id="dwn-btn" href="#">Descargar</a>
+            <a id="dwn-btn" href="#" target="_blank">Descargar</a>
    	        </div>
             </div>
 		    </div>
@@ -524,9 +524,10 @@ function cargarArticulo(data) {
     
 
     
-    
+   
 function pedirArticulos(parameterGenre){
-     $.getJSON('http://indiegamesattack.tk/appindie/cargargeneros.php?id='+parameterGenre, function(data) {
+     //$.getJSON('http://indiegamesattack.tk/appindie/cargargeneros.php?id='+parameterGenre, function(data) {
+     $.getJSON('http://indiegamesattack.tk/appindie/cargargeneros.php?id='+parameterGenre+'&usuario='+idUsuario, function(data) {
          var cantArticulos = Object.keys(data["articulos"]).length;
          $('#articulos-populares li').remove();
 
