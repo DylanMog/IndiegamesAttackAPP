@@ -18,9 +18,8 @@ Anexampleforphonegapbuild docs.
 HardeepShoker
 </author>
 
-     
-<plugin name="org.li8.inappbrowser" spec="0.1" source="pgb" />     
-     
+        
+<plugin name="com.stevenpartridge.inappbrowser" spec="1.4" source="pgb" />     
      
 </widget>
 
