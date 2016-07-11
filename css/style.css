@@ -753,6 +753,16 @@ input[type="checkbox"].green.ios-switch:checked + div > div {
     padding-bottom: 25px;
 }
 
+#text-article img{
+     width: 100%!important;
+     height: auto!important;
+}
+
+#text-article p img{
+     width: 100%!important;
+     height: auto!important;
+}
+
 #bg-article{
     background-color: #ca0e00;
      float: left;
