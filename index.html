@@ -185,18 +185,15 @@
 	// recolecta los valores que inserto el usuario
 	var datosUsuario = $("#nombredeusuario").val()
 	var datosPassword = $("#clave").val()
-
     var homeLoaded = false;
     var favoritesLoaded = false;
-	archivoValidacion = "http://indiegamesattack.tk/appindie/validacionReal.php?jsoncallback=?" 
-	//archivoValidacion = "http://localhost/appindie/validacionReal.php?jsoncallback=?" 
+	archivoValidacion = "http://indiegamesattack.tk/appindie/validacionReal.php?jsoncallback=?";
 	 
 	$.getJSON( archivoValidacion, { usuario:datosUsuario ,password:datosPassword}) 
 	.done(function(respuestaServer) {
         
         // Guardo en variable publica el id del usuario logueado
         idUsuario = respuestaServer.usuario;
-        //console.log(idUsuario);
 
 		if(respuestaServer.validacion == "ok"){
                 
@@ -224,101 +221,6 @@
                 
                 //
 			});
-
-		
-            /*
-			$("#favorito").on("pageshow", function(){ //al mostrarse esa pagina pasa algo.
-                if(favoritesLoaded == false){ // Reviso si ya lo cargo una vez
-                var elementosF = Object.keys(respuestaServer["favoritos"]).length;
-
-				for(var i=0; i< elementosF ; i++){
-                    
-                    var nombresCatsFav = "";
-                    var arrCategoriasFav = respuestaServer["favoritos"][i].categorias;
-
-                    for(var c=0; c< arrCategoriasFav.length ; c++){
-                            if(c == 0){
-                                nombresCatsFav = arrCategoriasFav[c].nombreCAT;
-                            }else{
-                                nombresCatsFav = nombresCatsFav + ", " + arrCategoriasFav[c].nombreCAT;
-                            }
-                    }
-                    
-                    var nombresGensFav = "";
-                    var arrGenerosFav = respuestaServer["favoritos"][i].generos;
-
-                    for(var g=0; g< arrGenerosFav.length ; g++){
-                            if(g == 0){
-                                nombresGensFav = arrGenerosFav[g].nombreGEN;
-                            }else{
-                                nombresGensFav = nombresGensFav + ", " + arrGenerosFav[g].nombreGEN;
-                            }
-                    }
-                    
-                    
-                    
-                     $('#articulos-favoritos').append(
-                    '<li class="articulo-favorito"><a data-transition="flip" href="javascript:openArticle(' + respuestaServer["favoritos"][i].idArticulo + ');">' +     
-					'<img src="/indie/' + respuestaServer["favoritos"][i].imagen + '"/>' +
-					'<h1>' + respuestaServer["favoritos"][i].tituloES + '</h1>' +
-                    '<p class="genero">' + nombresGensFav + '</p>' +
-                    '<p class="categoria">' + nombresCatsFav + '</p>' +
-					'</span></a></li>');
-				}
-                
-                    
-                favoritesLoaded = true;
-                }
-			});   
-            */
-            
-            /*
-            $("#preferencias").on("pageshow", function(){ //al mostrarse esa pagina pasa algo.
-                $('#lista-generos li').remove();
-                var cantGenPref = Object.keys(respuestaServer["generosprefe"]).length;
-                var cantListaGeneros = Object.keys(respuestaServer["listageneros"]).length;
-                
-                var arrayListaGeneros = new Array();
-                var arrayGenPref = new Array();
-                //var arrayListaGeneros = ["Accion","Rol","Aventura"];
-                
-                // Hago un array con todos los generos que existen
-                for(var lg=0; lg< cantListaGeneros ; lg++ ){
-                    //var arrayListaGeneros[] = respuestaServer["listageneros"][lg].nombreES;
-                    arrayListaGeneros.push(respuestaServer["listageneros"][lg].nombreES);
-                }
-                   
-                // Hago un array con los generos del usuario logueado
-				for(var p=0; p< cantGenPref ; p++){     
-                        arrayGenPref.push(respuestaServer["generosprefe"][p].nombreES);
-				}
-                
-                
-                // Genero lista de generos
-                for(var ar=0; ar< cantListaGeneros ; ar++){
-                  $('#lista-generos').append(
-                         '<li class="li-pref">' +
-                         '<img class="img-pref" src="img/preferencias/gen'+respuestaServer["listageneros"][ar].idGenero+'.png"/>' +
-                         '<h1>' + respuestaServer["listageneros"][ar].nombreES + '</h1>' + 
-                         '<label class="switch-box">'+
-                         '<input class="ios-switch green" id="check'+ respuestaServer["listageneros"][ar].idGenero +'" type="checkbox" name="check_list[]" value="'+ respuestaServer["listageneros"][ar].idGenero +'">'+'<div class="warer">'+'<div>'+'</div>'+'</div>'+'</input>' + '</label>' +
-                    '</li>');
-                    
-                    
-                    // Comparo si el genero esta en la lista de generos si es asi lo pongo como checked
-                    if($.inArray(respuestaServer["listageneros"][ar].nombreES, arrayGenPref) != -1) {
-                        //console.log("is in array");
-                        $('#check' + respuestaServer["listageneros"][ar].idGenero).prop("checked", true);
-                    }else {
-                        //console.log("is NOT in array");
-                    }
-                    
-                }
-                
-                
-                //$('#lista-generos').listview('refresh');
-			}); 
-             */
 
                 /* Esto guarda en el localstorage */
                 var datosLocales = JSON.stringify(respuestaServer);
@@ -354,7 +256,6 @@
                 
                 var arrayListaGeneros = new Array();
                 var arrayGenPref = new Array();
-                //var arrayListaGeneros = ["Accion","Rol","Aventura"];
                 
                 // Hago un array con todos los generos que existen
                 for(var lg=0; lg< cantListaGeneros ; lg++ ){
@@ -439,10 +340,6 @@
 			});
     
     
-    
-    
-    //var serviceURL = "http://localhost/appiga/";
-    
     function openArticle(queId)
     {
 	$.getJSON('http://indiegamesattack.tk/appindie/cargararticulo.php?id='+queId+'&idu='+idUsuario, cargarArticulo);  
@@ -463,21 +360,6 @@ function cargarArticulo(data) {
             }
         }
     
-    
-    /*
-    * Para remplazar un texto por espacio en blanco en jquery
-    var someVariable = data["articulo"][0].contenidoES;
-    someVariable = someVariable.replace('<p>', '');
-    someVariable = someVariable.replace('</p>', '');
-    $('#text-article').text(someVariable);
-    */
-    
-    
-    //var textoArt = data["articulo"][0].contenidoES;
-    //jQuery('<div />').text(textoArt).html();
-    //alert(textoArt);
-    //jQuery('<div />').html(textoArt).text() //
-    
     $('#category-article').text(nombresCatsArt);
     $('#title-article').text(data["articulo"][0].tituloES);
 	$('#cover-article').attr('src', 'http://indiegamesattack.tk/' + data["articulo"][0].portada);
@@ -492,11 +374,8 @@ function cargarArticulo(data) {
     
 	$('#text-article').html(contenidoOptimizado);
     
-    //$('#dwn-btn').attr('href', data["articulo"][0].url);
-     $('#dwn-btn').attr('onclick', 'window.open('+ "'" + data["articulo"][0].url + "'" + ", '_system'" +')');
-   // onclick="window.open('http://indiegamesattack.tk', '_system');"     
+     $('#dwn-btn').attr('onclick', 'window.open('+ "'" + data["articulo"][0].url + "'" + ", '_system'" +')');     
      
-    //$('#fav-btn').attr('onclick', 'marcarFavorito('+data["articulo"][0].idArticulo+')');
     
     var esFav = data["esfav"][0].idUsuario;
     var resFav = data["esfav"][0];
@@ -514,22 +393,12 @@ function cargarArticulo(data) {
         $('#fav-btn').attr('onclick', 'marcarFavorito('+data["articulo"][0].idArticulo+')');
     }
     
-
-    //console.log(data["esfav"][0].idUsuario);
-    
-   
-    
-    
-        
-
-    
 }
     
 
     
    
 function pedirArticulos(parameterGenre){
-     //$.getJSON('http://indiegamesattack.tk/appindie/cargargeneros.php?id='+parameterGenre, function(data) {
      $.getJSON('http://indiegamesattack.tk/appindie/cargargeneros.php?id='+parameterGenre+'&usuario='+idUsuario, function(data) {
          var cantArticulos = Object.keys(data["articulos"]).length;
          $('#articulos-populares li').remove();
@@ -603,7 +472,6 @@ function pedirArticulos(parameterGenre){
                     if(jQuery.inArray(String(arrayCheckedGens[acg]), String(arrayGenPref)) == -1) {
                         //console.log(arrayCheckedGens[acg] + " NO estoy");
                         // Como no esta en sus preferidos lo agrego.
-                        //agregarGenPerte(arrayCheckedGens[acg]);
                         $.getJSON('http://indiegamesattack.tk/appindie/agregarprefe.php?idusu='+idUsuario+'&idgen='+arrayCheckedGens[acg], final);
                     }else{
                         // Si ya esta no hago nada
@@ -633,7 +501,6 @@ function pedirArticulos(parameterGenre){
         $('#fav-btn').attr('onclick', 'eliminarFavorito('+queArt+')');
          $.getJSON('http://indiegamesattack.tk/appindie/marcarfavorito.php?usuario='+idUsuario+'&articulo='+queArt, function(data) {
          });
-        //console.log(queArt);
     }
     
 
@@ -644,7 +511,6 @@ function pedirArticulos(parameterGenre){
          $('#fav-btn').attr('onclick', 'marcarFavorito('+queArt+')');
          $.getJSON('http://indiegamesattack.tk/appindie/eliminarfavorito.php?usuario='+idUsuario+'&articulo='+queArt, function(data) {
          });
-        //console.log(queArt);
     }
     
     
@@ -654,8 +520,7 @@ function pedirArticulos(parameterGenre){
     }
     
     function final(){
-        // no hago nada
-        
+        // no hago nada  
     }
     
 </script>
