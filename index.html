@@ -337,7 +337,7 @@
             
 	}else{
 
-	    alert("no");
+	    alert("El Usuario y Contraseña ingresado no coinciden.");
 	}
 	})
 
@@ -622,7 +622,7 @@ function pedirArticulos(parameterGenre){
                     }
                     }
             
-            
+            $.mobile.changePage("#home"); // Redirige a esa page automaticamente va una vez
         });  
     }
     
