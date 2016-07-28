@@ -370,15 +370,17 @@ function cargarArticulo(data) {
      // Soluciono bug de videos rotos en app
      var re = "//www.youtube";
      var str = data["articulo"][0].contenidoES;
-     var contenidoOptimizado = str.replace(re, "https://www.youtube");
+     var contenidoOptimizadoUno = str.replace(re, "https://www.youtube");
      
      // Soluciono bug de imagenes en posts rotos
      var imgPosts = "/upload/images";
-     var strCon = data["articulo"][0].contenidoES;
-     var contenidoOptimizado = str.replace(imgPosts, "http://indiegamesattack.tk/upload/images");
+     //var strCon = data["articulo"][0].contenidoES;
+     var strCon = contenidoOptimizadoUno;
+     var contenidoOptimizadoDos = strCon.replace(imgPosts, "http://indiegamesattack.tk/upload/images");
      
     
-	$('#text-article').html(contenidoOptimizado);
+	//$('#text-article').html(contenidoOptimizado);
+	$('#text-article').html(contenidoOptimizadoDos);
     
      $('#dwn-btn').attr('onclick', 'window.open('+ "'" + data["articulo"][0].url + "'" + ", '_system'" +')');     
      
